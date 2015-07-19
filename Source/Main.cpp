@@ -11,7 +11,7 @@
 int main(int argc, char **argv)
 {
     CBBGame theGame;
-    theGame.Init(kGameLocationDummy);
+    theGame.Init(kGameLocationArena);
     int returnCode = theGame.Run();
     theGame.Cleanup();
     

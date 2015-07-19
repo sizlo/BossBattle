@@ -11,6 +11,11 @@
 
 #include "CGame.hpp"
 
+enum EBBGameLocation
+{
+    kGameLocationArena = kGameLocationDummy + 1
+};
+
 class CBBGame : public CGame
 {
 public:

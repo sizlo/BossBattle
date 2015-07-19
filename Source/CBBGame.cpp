@@ -7,6 +7,7 @@
 //
 
 #include "CBBGame.hpp"
+#include "CArena.hpp"
 
 CBBGame * CBBGame::Get()
 {
@@ -26,20 +27,15 @@ void CBBGame::InitialiseOptions()
 
 void CBBGame::GoToLocation(int theLocation, std::string filename)
 {
-    // If we're already in a location leave it
-    if (mCurrentLocation != NULL)
-    {
-        mCurrentLocation->Exit();
-        SAFE_DELETE(mCurrentLocation);
-    }
-    
     switch (theLocation)
-    {            
+    {
+        case kGameLocationArena:
+            mNextLocation = new CArena();
+            break;
+            
         default:
             DEBUG_LOG("Unimplemented game location - going to dummy location");
-            mCurrentLocation = new CDummyGameLocation();
+            mNextLocation = new CDummyGameLocation();
             break;
     }
-    
-    mCurrentLocation->Enter();
 }
