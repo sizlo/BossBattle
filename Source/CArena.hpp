@@ -5,6 +5,7 @@
 #include "CUpdateable.hpp"
 #include "CRenderable.hpp"
 #include "CGameObject.hpp"
+#include "CStaticGameObject.hpp"
 #include "CMessageListener.hpp"
 
 class CPlayer;
@@ -35,6 +36,10 @@ public:
     
 private:    
     std::list<CGameObject *> mObjects;
+    std::list<CStaticGameObject *> mStaticObjects;
+    CGameObject *mPlayer;
+    
+    float mArenaSize;
     
     static CArena *smCurrentArena;
 };

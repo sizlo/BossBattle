@@ -12,6 +12,8 @@ public:
     void Update(CTime elapsedTime) = 0;
     void Draw(CWindow *theWindow) = 0;
 
+    void SetShape(CConvexShape theShape);
+    CConvexShape & GetShape();
     CVector2f GetPosition();
     
     bool IsDead();

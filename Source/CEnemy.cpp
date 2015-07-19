@@ -5,7 +5,7 @@ CEnemy::CEnemy(CGameObject *theTarget)
 {
     mShape = CCircleShape(50);
     mShape.setFillColor(CColour::Red);
-    mShape.setPosition(GameOptions::windowWidth / 2.0f, GameOptions::windowHeight / 2.0f);
+    mShape.setPosition(0.0f, 0.0f);
     
     mTarget = theTarget;
     

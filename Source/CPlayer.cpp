@@ -4,7 +4,7 @@ CPlayer::CPlayer()
 {
     mShape = CCircleShape(30);
     mShape.setFillColor(CColour::Blue);
-    mShape.setPosition(GameOptions::windowWidth / 2.0f, GameOptions::windowHeight / 4.0f);
+    mShape.setPosition(0.0f, 200.0f);
     
     mSpeed = 500.0f;
 }
