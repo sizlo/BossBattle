@@ -2,21 +2,23 @@
 #define __BossBattle__CEnemy__
 
 #include "CGameObject.hpp"
+#include "CEnemyAttack.hpp"
 
 class CPlayer;
 
 class CEnemy : public CGameObject
 {
 public:
-    CEnemy(CPlayer *theTarget);
+    CEnemy(CGameObject *theTarget);
     ~CEnemy();
     
     void Update(CTime elapsedTime);
     void Draw(CWindow *theWindow);
     
 private:
-    CConvexShape mShape;
-    CPlayer *mTarget;
+    CGameObject *mTarget;
+    
+    std::list<CEnemyAttack *> mAttacks;
 };
 
 #endif // __BossBattle__CEnemy__

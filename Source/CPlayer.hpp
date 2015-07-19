@@ -13,7 +13,6 @@ public:
     void Draw(CWindow *theWindow);
     
 private:
-    CConvexShape mShape;
     float mSpeed;
 };
 
