@@ -18,7 +18,7 @@ public:
     std::string GetTag();
     bool IsA(std::string theTagToCheckFor);
     
-    virtual void ReactToCollision(CGameObject *theOtherObject);
+    virtual void ReactToCollision(CGameObject *theOtherObject, CVector2f correctionVector);
     
     bool IsDead();
     void MarkAsDead();

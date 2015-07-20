@@ -2,6 +2,7 @@
 
 CWave::CWave(CVector2f center, float startRadius, float endRadius, float growSpeed) : CGameObject("Wave")
 {
+    mActive = true;
     mCenter = center;
     mRadius = startRadius;
     mMaxRadius = endRadius;
@@ -31,4 +32,14 @@ void CWave::Update(CTime elapsedTime)
 void CWave::Draw(CWindow *theWindow)
 {
     theWindow->DrawShape(mShape);
+}
+
+bool CWave::IsActive()
+{
+    return mActive;
+}
+
+void CWave::Deactivate()
+{
+    mActive = false;
 }

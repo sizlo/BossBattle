@@ -12,7 +12,11 @@ public:
     void Update(CTime elapsedTime);
     void Draw(CWindow *theWindow);
     
+    bool IsActive();
+    void Deactivate();
+    
 private:
+    bool mActive;
     CVector2f mCenter;
     float mRadius;
     float mMaxRadius;

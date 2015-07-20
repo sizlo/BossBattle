@@ -31,7 +31,7 @@ bool CGameObject::IsA(std::string theTagToCheckFor)
     return mTag.compare(theTagToCheckFor) == 0;
 }
 
-void CGameObject::ReactToCollision(CGameObject *theOtherObject)
+void CGameObject::ReactToCollision(CGameObject *theOtherObject, CVector2f correctionVector)
 {
     // Do nothing by default
 }

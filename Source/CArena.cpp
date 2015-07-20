@@ -110,8 +110,8 @@ void CArena::Update(CTime elapsedTime)
                                            theStaticObject->GetShape(),
                                            cv,
                                            kCRMoveLeft);
-                theObject->ReactToCollision(theStaticObject);
-                theStaticObject->ReactToCollision(theObject);
+                theObject->ReactToCollision(theStaticObject, cv);
+                theStaticObject->ReactToCollision(theObject, cv);
             }
         }
         // Dynamic objects
@@ -129,8 +129,8 @@ void CArena::Update(CTime elapsedTime)
                                                theOtherObject->GetShape(),
                                                &cv))
             {
-                theObject->ReactToCollision(theOtherObject);
-                theOtherObject->ReactToCollision(theObject);
+                theObject->ReactToCollision(theOtherObject, cv);
+                theOtherObject->ReactToCollision(theObject, cv);
             }
         }
     }

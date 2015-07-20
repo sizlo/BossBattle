@@ -36,7 +36,7 @@ void CProjectile::Draw(CWindow *theWindow)
     theWindow->DrawShape(mShape);
 }
 
-void CProjectile::ReactToCollision(CGameObject *theOtherObject)
+void CProjectile::ReactToCollision(CGameObject *theOtherObject, CVector2f correctionVector)
 {
     if (theOtherObject->IsA("Wall"))
     {
@@ -46,7 +46,7 @@ void CProjectile::ReactToCollision(CGameObject *theOtherObject)
             mVelocity = CVector2f(0.0f, 0.0f);
         }
     }
-    else if (theOtherObject->IsA("Player"))
+    else if (theOtherObject->IsA("Player") && IsActive())
     {
         MarkAsDead();
     }

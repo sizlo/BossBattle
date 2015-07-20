@@ -12,11 +12,12 @@ public:
     void Update(CTime elapsedTime);
     void Draw(CWindow *theWindow);
     
-    void ReactToCollision(CGameObject *theOtherObject);
+    void ReactToCollision(CGameObject *theOtherObject, CVector2f correctionVector);
+    
+    bool IsActive();
     
 private:
     void KillAfterTime(CTime theTime);
-    bool IsActive();
     
     bool mActive;
     CVector2f mVelocity;

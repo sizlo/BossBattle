@@ -1,8 +1,11 @@
 #include "CPlayer.hpp"
+#include "CProjectile.hpp"
+#include "CWave.hpp"
 
 CPlayer::CPlayer() : CGameObject("Player")
 {
-    mShape = CCircleShape(30);
+    mRadius = 30.0f;
+    mShape = CCircleShape(mRadius);
     mShape.setFillColor(CColour::Blue);
     mShape.setPosition(0.0f, 200.0f);
     
@@ -57,11 +60,25 @@ void CPlayer::Draw(CWindow *theWindow)
     theWindow->DrawShape(mShape);
 }
 
-void CPlayer::ReactToCollision(CGameObject *theOtherObject)
+void CPlayer::ReactToCollision(CGameObject *theOtherObject, CVector2f correctionVector)
 {
     if (theOtherObject->IsA("Projectile"))
     {
-        FlashForTime(CTime::Seconds(0.5f));
+        CProjectile *theProjectile = (CProjectile *) theOtherObject;
+        if (theProjectile->IsActive())
+        {
+            FlashForTime(CTime::Seconds(0.5f));
+        }
+    }
+    else if (theOtherObject->IsA("Wave"))
+    {
+        CWave *theWave = (CWave *) theOtherObject;
+        // Make sure we're on the boundary of the wave and it is active
+        if (theWave->IsActive() && correctionVector.GetMagnitude() < 2*mRadius)
+        {
+            FlashForTime(CTime::Seconds(0.5f));
+            theWave->Deactivate();
+        }
     }
 }
 
