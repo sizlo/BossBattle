@@ -1,5 +1,6 @@
 #include "CEnemy.hpp"
 #include "CEAProjectile.hpp"
+#include "CEAWave.hpp"
 
 CEnemy::CEnemy(CGameObject *theTarget)
 {
@@ -10,6 +11,7 @@ CEnemy::CEnemy(CGameObject *theTarget)
     mTarget = theTarget;
     
     mAttacks.push_back(new CEAProjectile(CTime::Seconds(1.0f)));
+    mAttacks.push_back(new CEAWave(CTime::Seconds(5.0f)));
 }
 
 CEnemy::~CEnemy()
