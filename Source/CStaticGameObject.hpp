@@ -6,7 +6,7 @@
 class CStaticGameObject : public CGameObject
 {
 public:
-    CStaticGameObject(CConvexShape theShape);
+    CStaticGameObject(CConvexShape theShape, std::string theTag);
     ~CStaticGameObject();
     
     void Update(CTime elapsedTime);

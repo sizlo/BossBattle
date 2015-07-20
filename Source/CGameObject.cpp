@@ -1,8 +1,9 @@
 #include "CGameObject.hpp"
 
-CGameObject::CGameObject()
+CGameObject::CGameObject(std::string theTag)
 {
     mDead = false;
+    mTag = theTag;
 }
 
 void CGameObject::SetShape(CConvexShape theShape)
@@ -18,6 +19,21 @@ CConvexShape & CGameObject::GetShape()
 CVector2f CGameObject::GetPosition()
 {
     return mShape.getPosition();
+}
+
+std::string CGameObject::GetTag()
+{
+    return mTag;
+}
+
+bool CGameObject::IsA(std::string theTagToCheckFor)
+{
+    return mTag.compare(theTagToCheckFor) == 0;
+}
+
+void CGameObject::ReactToCollision(CGameObject *theOtherObject)
+{
+    // Do nothing by default
 }
 
 bool CGameObject::IsDead()

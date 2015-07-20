@@ -2,7 +2,7 @@
 #include "CEAProjectile.hpp"
 #include "CEAWave.hpp"
 
-CEnemy::CEnemy(CGameObject *theTarget)
+CEnemy::CEnemy(CGameObject *theTarget) : CGameObject("Enemy")
 {
     mShape = CCircleShape(50);
     mShape.setFillColor(CColour::Red);

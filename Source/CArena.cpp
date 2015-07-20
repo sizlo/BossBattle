@@ -21,15 +21,15 @@ CArena::CArena()
     CConvexShape verticalWall = CRectangleShape(wallThickness, mArenaSize + 2*wallThickness);
     verticalWall.setFillColor(CColour::Black);
     verticalWall.setPosition((-mArenaSize / 2.0f) - wallThickness, (-mArenaSize / 2.0f) - wallThickness);
-    mStaticObjects.push_back(new CStaticGameObject(verticalWall));
+    mStaticObjects.push_back(new CStaticGameObject(verticalWall, "Wall"));
     verticalWall.setPosition(mArenaSize / 2.0f, (-mArenaSize / 2.0f) - wallThickness);
-    mStaticObjects.push_back(new CStaticGameObject(verticalWall));
+    mStaticObjects.push_back(new CStaticGameObject(verticalWall, "Wall"));
     CConvexShape horizontalWall = CRectangleShape(mArenaSize + 2*wallThickness, wallThickness);
     horizontalWall.setFillColor(CColour::Black);
     horizontalWall.setPosition((-mArenaSize / 2.0f) - wallThickness, (-mArenaSize / 2.0f) - wallThickness);
-    mStaticObjects.push_back(new CStaticGameObject(horizontalWall));
+    mStaticObjects.push_back(new CStaticGameObject(horizontalWall, "Wall"));
     horizontalWall.setPosition((-mArenaSize / 2.0f) - wallThickness, mArenaSize / 2.0f);
-    mStaticObjects.push_back(new CStaticGameObject(horizontalWall));
+    mStaticObjects.push_back(new CStaticGameObject(horizontalWall, "Wall"));
     
     
 }
@@ -92,6 +92,8 @@ void CArena::Update(CTime elapsedTime)
                                            theStaticObject->GetShape(),
                                            cv,
                                            kCRMoveLeft);
+                theObject->ReactToCollision(theStaticObject);
+                theStaticObject->ReactToCollision(theObject);
             }
         }
     }

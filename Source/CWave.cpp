@@ -1,6 +1,6 @@
 #include "CWave.hpp"
 
-CWave::CWave(CVector2f center, float startRadius, float endRadius, float growSpeed)
+CWave::CWave(CVector2f center, float startRadius, float endRadius, float growSpeed) : CGameObject("Wave")
 {
     mCenter = center;
     mRadius = startRadius;
@@ -17,6 +17,11 @@ void CWave::Update(CTime elapsedTime)
 {
     mRadius += mGrowSpeed * elapsedTime.asSeconds();
     
+    SetShape(CCircleShape(mRadius));
+    mShape.setOutlineThickness(1.0f);
+    mShape.setOutlineColor(CColour::Black);
+    mShape.setFillColor(CColour(0, 0, 0, 0));
+    
     if (mRadius > mMaxRadius)
     {
         MarkAsDead();
@@ -25,9 +30,5 @@ void CWave::Update(CTime elapsedTime)
 
 void CWave::Draw(CWindow *theWindow)
 {
-    CConvexShape theShape = CCircleShape(mRadius);
-    theShape.setOutlineThickness(1.0f);
-    theShape.setOutlineColor(CColour::Black);
-    theShape.setFillColor(CColour(0, 0, 0, 0));
-    theWindow->DrawShape(theShape);
+    theWindow->DrawShape(mShape);
 }

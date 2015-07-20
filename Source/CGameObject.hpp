@@ -7,14 +7,18 @@
 class CGameObject : public CUpdateable, public CRenderable
 {
 public:
-    CGameObject();
+    CGameObject(std::string theTag);
     
-    void Update(CTime elapsedTime) = 0;
-    void Draw(CWindow *theWindow) = 0;
+    virtual void Update(CTime elapsedTime) = 0;
+    virtual void Draw(CWindow *theWindow) = 0;
 
     void SetShape(CConvexShape theShape);
     CConvexShape & GetShape();
     CVector2f GetPosition();
+    std::string GetTag();
+    bool IsA(std::string theTagToCheckFor);
+    
+    virtual void ReactToCollision(CGameObject *theOtherObject);
     
     bool IsDead();
     void MarkAsDead();
@@ -24,6 +28,7 @@ protected:
     
 private:
     bool mDead;
+    std::string mTag;
 };
 
 #endif // __BossBattle__CGameObject__

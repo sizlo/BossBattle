@@ -1,6 +1,6 @@
 #include "CStaticGameObject.hpp"
 
-CStaticGameObject::CStaticGameObject(CConvexShape theShape) : CGameObject()
+CStaticGameObject::CStaticGameObject(CConvexShape theShape, std::string theTag) : CGameObject(theTag)
 {
     SetShape(theShape);
 }

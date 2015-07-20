@@ -12,8 +12,15 @@ public:
     void Update(CTime elapsedTime);
     void Draw(CWindow *theWindow);
     
+    void ReactToCollision(CGameObject *theOtherObject);
+    
 private:
+    void KillAfterTime(CTime theTime);
+    bool IsActive();
+    
+    bool mActive;
     CVector2f mVelocity;
+    CTime mDeathTime;
 };
 
 #endif // __BossBattle__CProjectile__

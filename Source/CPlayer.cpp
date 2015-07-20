@@ -1,6 +1,6 @@
 #include "CPlayer.hpp"
 
-CPlayer::CPlayer()
+CPlayer::CPlayer() : CGameObject("Player")
 {
     mShape = CCircleShape(30);
     mShape.setFillColor(CColour::Blue);
