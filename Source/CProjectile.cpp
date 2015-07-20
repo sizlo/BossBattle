@@ -46,6 +46,10 @@ void CProjectile::ReactToCollision(CGameObject *theOtherObject)
             mVelocity = CVector2f(0.0f, 0.0f);
         }
     }
+    else if (theOtherObject->IsA("Player"))
+    {
+        MarkAsDead();
+    }
 }
 
 void CProjectile::KillAfterTime(CTime theTime)

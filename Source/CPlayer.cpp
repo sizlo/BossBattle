@@ -41,9 +41,39 @@ void CPlayer::Update(CTime elapsedTime)
     
     direction.Normalise();
     mShape.move(direction * elapsedTime.asSeconds() * mSpeed);
+    
+    if (mFlashing)
+    {
+        mFlashTime -= elapsedTime;
+        if (mFlashTime <= CTime::Zero)
+        {
+            StopFlashing();
+        }
+    }
 }
 
 void CPlayer::Draw(CWindow *theWindow)
 {
     theWindow->DrawShape(mShape);
+}
+
+void CPlayer::ReactToCollision(CGameObject *theOtherObject)
+{
+    if (theOtherObject->IsA("Projectile"))
+    {
+        FlashForTime(CTime::Seconds(0.5f));
+    }
+}
+
+void CPlayer::FlashForTime(CTime theTime)
+{
+    mFlashing = true;
+    mFlashTime = theTime;
+    mShape.setFillColor(CColour::Green);
+}
+
+void CPlayer::StopFlashing()
+{
+    mFlashing = 0;
+    mShape.setFillColor(CColour::Blue);
 }

@@ -72,6 +72,21 @@ void CArena::StartBattle()
 
 void CArena::Update(CTime elapsedTime)
 {
+    // Remove and destroy objects which died last frame
+    std::list<CGameObject *> deadObjects;
+    for (CGameObject *theObject : mObjects)
+    {
+        if (theObject->IsDead())
+        {
+            deadObjects.push_back(theObject);
+        }
+    }
+    for (CGameObject *theObject : deadObjects)
+    {
+        mObjects.remove(theObject);
+    }
+    FREE_LIST_CONTENTS(deadObjects);
+    
     // Update each object
     for (CGameObject *theObject : mObjects)
     {
@@ -79,8 +94,11 @@ void CArena::Update(CTime elapsedTime)
     }
     
     // Solve collisions
-    for (CGameObject *theObject : mObjects)
+    for (auto theIt = mObjects.begin(); theIt != mObjects.end(); ++theIt)
     {
+        CGameObject *theObject = *theIt;
+        
+        // Static objects
         for (CGameObject *theStaticObject : mStaticObjects)
         {
             CVector2f cv;
@@ -96,22 +114,26 @@ void CArena::Update(CTime elapsedTime)
                 theStaticObject->ReactToCollision(theObject);
             }
         }
-    }
-    
-    // Remove and destroy dead objects
-    std::list<CGameObject *> deadObjects;
-    for (CGameObject *theObject : mObjects)
-    {
-        if (theObject->IsDead())
+        // Dynamic objects
+        // Check from this iterator onwards to prevent checking the same pair twice
+        for (auto theOtherIt = theIt; theOtherIt != mObjects.end(); ++theOtherIt)
         {
-            deadObjects.push_back(theObject);
+            CGameObject *theOtherObject = *theOtherIt;
+            if (theObject == theOtherObject)
+            {
+                continue;
+            }
+            
+            CVector2f cv;
+            if (CollisionHandler::AreColliding(theObject->GetShape(),
+                                               theOtherObject->GetShape(),
+                                               &cv))
+            {
+                theObject->ReactToCollision(theOtherObject);
+                theOtherObject->ReactToCollision(theObject);
+            }
         }
     }
-    for (CGameObject *theObject : deadObjects)
-    {
-        mObjects.remove(theObject);
-    }
-    FREE_LIST_CONTENTS(deadObjects);
 }
 
 void CArena::Draw(CWindow *theWindow)
