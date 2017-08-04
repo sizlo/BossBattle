@@ -7,11 +7,12 @@
 //
 
 #include "CBBGame.hpp"
+#include "CArena.hpp"
 
 int main(int argc, char **argv)
 {
     CBBGame theGame;
-    theGame.Init(kGameLocationArena);
+    theGame.Init(new CArena());
     int returnCode = theGame.Run();
     theGame.Cleanup();
     

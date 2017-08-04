@@ -11,11 +11,6 @@
 
 #include "CGame.hpp"
 
-enum EBBGameLocation
-{
-    kGameLocationArena = kGameLocationDummy + 1
-};
-
 class CBBGame : public CGame
 {
 public:
@@ -24,7 +19,6 @@ public:
     CBBGame();
     
     void InitialiseOptions();
-    void GoToLocation(int theLocation, std::string filename);
 };
 
 #endif /* defined(__BossBattle__CBBGame__) */
